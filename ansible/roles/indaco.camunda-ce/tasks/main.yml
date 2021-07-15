@@ -1,0 +1,28 @@
+---
+# tasks file for indaco.camunda-ce
+
+- name: Create 'portainer_ce/data' folder if not exists
+  ansible.builtin.file:
+    path: '{{ portainer_ce_data_path }}'
+    state: directory
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0755'
+
+- name: Copy docker-compose template file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: '{{ homefolder_path }}/docker-compose.yml'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0644'
+
+- name: Pull the camunda-bpm-platform docker image
+  community.docker.docker_image:
+    name: camunda/camunda-bpm-platform:run-latest
+    source: pull
+
+- name: Run docker-compose stack
+  ansible.builtin.shell:
+    cmd: docker-compose up -d
+    chdir: '{{ homefolder_path }}'

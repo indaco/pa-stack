@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    # System update and  essentials packages installation
+    - role: indaco.essentials
+
+    # Enable and setup the firewall (UFW)
+    - role: indaco.firewall
+
+    # Install Docker and Docker Compose
+    - role: indaco.docker
+
+    # Setup Camunda and Portainer with docker-compose
+    - role: indaco.camunda-ce

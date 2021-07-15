@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+MACHINE_NAME="camundace"
+ANSIBLE_PLAYBOOK="../ansible/playbook.yml"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+  config.vm.hostname = "#{MACHINE_NAME}"
+  config.vm.define "#{MACHINE_NAME}"
+  config.ssh.insert_key = false
+
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "#{MACHINE_NAME}"
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = false # true to see stdout
+    ansible.playbook = "#{ANSIBLE_PLAYBOOK}"
+  end
+end

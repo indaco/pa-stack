@@ -1,0 +1,24 @@
+---
+# tasks file for indaco.firewall
+
+- ansible.builtin.include_tasks: ufw-setup.yml
+
+- name: Allow all access to tcp port 8080 (Camunda)
+  become: yes
+  community.general.ufw:
+    rule: allow
+    port: '8080'
+    proto: tcp
+
+- name: Allow all access to tcp port 9000 (Portainer.io)
+  become: yes
+  community.general.ufw:
+    rule: allow
+    port: '9000'
+    proto: tcp
+
+- name: Restart UFW
+  become: yes
+  ansible.builtin.service:
+    name: ufw
+    state: restarted

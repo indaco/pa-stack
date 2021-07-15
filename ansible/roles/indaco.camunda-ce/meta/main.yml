@@ -1,0 +1,21 @@
+collections:
+  - community.general
+  - community.docker
+galaxy_info:
+  author: indaco
+  description: Run the docker-compose stack on the Docker engine.
+  license: MIT
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - 20.04
+  galaxy_tags:
+    - docker
+    - compose
+    - development
+    - container

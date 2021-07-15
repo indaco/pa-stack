@@ -1,0 +1,20 @@
+galaxy_info:
+  author: indaco
+  description: Install Docker and Docker Compose on Debian and Ubuntu.
+  license: MIT
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+  galaxy_tags:
+    - docker
+    - compose
+    - development
+    - container
